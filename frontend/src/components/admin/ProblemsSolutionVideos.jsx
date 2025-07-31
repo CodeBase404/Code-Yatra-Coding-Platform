@@ -131,7 +131,7 @@ function ProblemsSolutionVideos() {
 
       {/* Gallery */}
       <div className="max-w-7xl mx-auto px-4 pb-8">
-        {loading ? (
+        {loading && !solutionVideos ? (
           <p className="text-center">Loading...</p>
         ) : error ? (
           <p className="text-center text-red-500">Error: {error}</p>
