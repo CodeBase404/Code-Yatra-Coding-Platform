@@ -1,13 +1,8 @@
 import { Flame, Calendar, Star, TrendingUp } from "lucide-react";
 import { format } from "date-fns";
 
-const StreakWidget = ({ streak, loading }) => {
+const StreakWidget = ({ streak }) => {
   if (!streak) return null;
-  
-  if (loading)
-    return (
-      <div className="rounded-xl bg-white/5 h-97"></div>
-    );
 
   const isActiveStreak = streak.count > 0;
   const streakPercentage = Math.min((streak.count / streak.highestStreak) * 100, 100);

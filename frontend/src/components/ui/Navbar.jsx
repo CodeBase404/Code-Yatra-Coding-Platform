@@ -114,7 +114,7 @@ function Navbar() {
           <Menu />
         </div>
         <NavLink to="/" className="flex gap-1.5 font-bold">
-          <Code className="hidden md:block"/> <span>CodeYatra</span>
+          <Code className="hidden md:block" /> <span>CodeYatra</span>
         </NavLink>
         {path.startsWith("/problems/") && (
           <div className="flex items-center gap-3">
@@ -128,17 +128,15 @@ function Navbar() {
             <div className="flex gap-2">
               <ChevronLeft
                 onClick={goToPrev}
-                className={`hover:bg-black/10 hover:text-gray-700 dark:hover:bg-gray-500 rounded-md cursor-pointer ${
-                  currentIndex <= 0 ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={`hover:bg-black/10 hover:text-gray-700 dark:hover:bg-gray-500 rounded-md cursor-pointer ${currentIndex <= 0 ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
               />
               <ChevronRight
                 onClick={goToNext}
-                className={`hover:bg-black/10 hover:text-gray-700 dark:hover:bg-gray-500 rounded-md cursor-pointer ${
-                  currentIndex >= problems.length - 1
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
-                }`}
+                className={`hover:bg-black/10 hover:text-gray-700 dark:hover:bg-gray-500 rounded-md cursor-pointer ${currentIndex >= problems.length - 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+                  }`}
               />
             </div>
           </div>
@@ -248,12 +246,8 @@ function Navbar() {
               <li>
                 <button
                   onClick={handleLogout}
-                  disabled={loading}
-                  className={`${
-                    loading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
                 >
-                  {loading ? "Logging out..." : "Logout"}
+                  Logout
                 </button>
               </li>
             </ul>
@@ -283,12 +277,9 @@ function Navbar() {
         {isAuthenticated ? (
           <button
             onClick={handleLogout}
-            disabled={loading}
-            className={`btn btn-dash btn-error hover:text-white ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={`btn btn-dash btn-error hover:text-white `}
           >
-            {loading ? "Logging out..." : "Logout"}
+            Logout
           </button>
         ) : (
           <NavLink
@@ -302,9 +293,8 @@ function Navbar() {
 
       {/* mobile */}
       <div
-        className={`fixed left-0 top-0 bg-white dark:bg-[#1E1E1E] z-[100]  h-full transition-all w-70 lg:hidden ${
-          isopen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed left-0 top-0 bg-white dark:bg-[#1E1E1E] z-[100]  h-full transition-all w-70 lg:hidden ${isopen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <Sidebar setIsOpen={setIsOpen} />
       </div>

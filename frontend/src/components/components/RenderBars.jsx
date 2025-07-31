@@ -101,7 +101,7 @@ function RenderBars({
           transition={{ duration: 0.5, ease: "easeOut" }}
           className={`mt-2 shadow shadow-gray-500 p-1 ${
             algorithm.length >= 2 ? "lg:text-[10px]" : ""
-          } text-[10px] mx-4 lg:text-xl font-semibold text-white`}
+          } text-[10px] mx-4 lg:text-xl font-semibold text-black dark:text-white`}
         >
           ✅ Sorting Completed 🎉 Sorted Array : [{current.array.join(", ")}]
         </motion.div>

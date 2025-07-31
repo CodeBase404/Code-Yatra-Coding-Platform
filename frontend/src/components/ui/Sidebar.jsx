@@ -12,10 +12,9 @@ function Sidebar({setIsOpen}) {
             <NavLink to="/" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>Home</NavLink>
             <NavLink  to="/problemset" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>Problems</NavLink>
             <NavLink  to="/contest" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>Contest</NavLink>
-            <NavLink  to="/" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>Discuss</NavLink>
             <NavLink to="/ai-interview" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>Ai Interviewer</NavLink>
-            <NavLink to="/" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>Generate Resume</NavLink>
-            <NavLink to="/" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>DSA Visualizer</NavLink>
+            <NavLink to="/generate-resume" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>Generate Resume</NavLink>
+            <NavLink to="/visualize-algo" className='hover:bg-black/10 dark:hover:bg-white/10 p-2 rounded-md'>DSA Visualizer</NavLink>
         </div>
     </div>
   )

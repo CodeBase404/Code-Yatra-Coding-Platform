@@ -28,7 +28,7 @@ function ProblemSet() {
             <DailyProblem />
           </div>
           <div className="hidden lg:block w-full">
-            <StreakWidget streak={user?.streak} loading={loading} />
+            <StreakWidget streak={user?.streak}  />
           </div>
           <div className="w-full flex items-center justify-center">
             <Calendar
