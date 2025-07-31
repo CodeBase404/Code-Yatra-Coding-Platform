@@ -70,7 +70,7 @@ function ProblemsSolutionVideos() {
     return matchesTitle && matchesDifficulty && matchesTag && matchesDuration;
   });
 
-  if (loading && solutionVideos) {
+  if (loading && !solutionVideos) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="flex items-center space-x-2 text-gray-600">
