@@ -296,7 +296,7 @@ const GenerateResume = () => {
             disabled={loading}
             className="textarea textarea-bordered textarea-success bg-white dark:bg-purple-500/50 w-full h-48 mb-6 resize-none text-base dark:text-white"
             placeholder="I am a software developer with 5 years of experience in React and Node.js. I have worked at several startups and built e-commerce platforms. I have a degree in Computer Science from Stanford University..."
-            autoFocus
+         
           />
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -338,7 +338,7 @@ const GenerateResume = () => {
       initial="initial"
       animate="in"
       exit="out"
-      variants={pageVariants}
+      // variants={pageVariants}
       className="relative z-50 min-h-screen p-4"
     >
       <div className="max-w-4xl mx-auto">

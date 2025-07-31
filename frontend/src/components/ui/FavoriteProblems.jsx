@@ -17,15 +17,6 @@ const FavoriteProblems = () => {
     dispatch(fetchFavorites());
   }, [dispatch]);
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-32">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500" />
-        <p className="ml-3 text-gray-600 dark:text-white">Loading favorites...</p>
-      </div>
-    );
-  }
-
   const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
       case "easy":
