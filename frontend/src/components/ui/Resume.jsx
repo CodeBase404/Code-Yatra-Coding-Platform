@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa";
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
-import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 const Resume = ({ data }) => {
@@ -54,34 +53,8 @@ const Resume = ({ data }) => {
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      className="w-full max-w-4xl mx-auto"
-    >
+    <div className="w-full max-w-4xl mx-auto">
       <div
         ref={resumeRef}
         className="bg-white dark:bg-white/10 shadow rounded-lg overflow-hidden"
@@ -92,10 +65,7 @@ const Resume = ({ data }) => {
         }}
       >
         {/* Header Section */}
-        <motion.div
-          variants={itemVariants}
-          className="bg-gradient-to-r from-yellow-600 dark:from-black/10 to-orange-600 dark:to-gray-600 text-white p-8"
-        >
+        <div className="bg-gradient-to-r from-yellow-600 dark:from-black/10 to-orange-600 dark:to-gray-600 text-white p-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-2">
               {data.personalInformation.fullName}
@@ -137,12 +107,12 @@ const Resume = ({ data }) => {
               )}
             </div>
           </div>
-        </motion.div>
+        </div>
 
         <div className="p-8 space-y-8">
           {/* Summary Section */}
           {data.summary && (
-            <motion.section variants={itemVariants}>
+            <section>
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 flex items-center">
                 <div className="w-1 h-6 bg-blue-600 mr-3 rounded"></div>
                 Professional Summary
@@ -150,12 +120,12 @@ const Resume = ({ data }) => {
               <p className="text-gray-700 leading-relaxed dark:text-gray-300">
                 {data.summary}
               </p>
-            </motion.section>
+            </section>
           )}
 
           {/* Skills Section */}
           {data.skills.length > 0 && (
-            <motion.section variants={itemVariants}>
+            <section>
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 flex items-center">
                 <div className="w-1 h-6 bg-green-600 mr-3 rounded"></div>
                 Technical Skills
@@ -175,12 +145,12 @@ const Resume = ({ data }) => {
                   </div>
                 ))}
               </div>
-            </motion.section>
+            </section>
           )}
 
           {/* Experience Section */}
           {data.experience.length > 0 && (
-            <motion.section variants={itemVariants}>
+            <section>
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 flex items-center">
                 <div className="w-1 h-6 bg-purple-600 mr-3 rounded"></div>
                 Professional Experience
@@ -206,12 +176,12 @@ const Resume = ({ data }) => {
                   </div>
                 ))}
               </div>
-            </motion.section>
+            </section>
           )}
 
           {/* Education Section */}
           {data.education.length > 0 && (
-            <motion.section variants={itemVariants}>
+            <section>
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 flex items-center">
                 <div className="w-1 h-6 bg-indigo-600 mr-3 rounded"></div>
                 Education
@@ -234,12 +204,12 @@ const Resume = ({ data }) => {
                   </div>
                 ))}
               </div>
-            </motion.section>
+            </section>
           )}
 
           {/* Projects Section */}
           {data.projects.length > 0 && (
-            <motion.section variants={itemVariants}>
+            <section>
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 flex items-center">
                 <div className="w-1 h-6 bg-orange-600 mr-3 rounded"></div>
                 Key Projects
@@ -269,14 +239,14 @@ const Resume = ({ data }) => {
                   </div>
                 ))}
               </div>
-            </motion.section>
+            </section>
           )}
 
           {/* Additional Sections */}
           <div className="grid md:grid-cols-2 gap-8">
             {/* Certifications */}
             {data.certifications.length > 0 && (
-              <motion.section variants={itemVariants}>
+              <section>
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-3 flex items-center">
                   <div className="w-1 h-5 bg-red-600 mr-3 rounded"></div>
                   Certifications
@@ -296,12 +266,12 @@ const Resume = ({ data }) => {
                     </div>
                   ))}
                 </div>
-              </motion.section>
+              </section>
             )}
 
             {/* Languages */}
             {data.languages.length > 0 && (
-              <motion.section variants={itemVariants}>
+              <section>
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-3 flex items-center">
                   <div className="w-1 h-5 bg-teal-600 mr-3 rounded"></div>
                   Languages
@@ -316,17 +286,14 @@ const Resume = ({ data }) => {
                     </div>
                   ))}
                 </div>
-              </motion.section>
+              </section>
             )}
           </div>
         </div>
       </div>
 
       {/* Download Buttons */}
-      <motion.div
-        variants={itemVariants}
-        className="flex flex-col items-center justify-center gap-4 mt-6"
-      >
+      <div className="flex flex-col items-center justify-center gap-4 mt-6">
         <p className="text-sm text-gray-600 dark:text-gray-400">
           📄 PDF will be downloaded in the currently selected theme:{" "}
           <span className="font-semibold text-black dark:text-white">
@@ -334,15 +301,15 @@ const Resume = ({ data }) => {
           </span>
         </p>
 
-          <button
-            onClick={handleDownloadPdf}
-            className="btn btn-soft btn-primary btn-lg gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            <FaDownload />
-            Download PDF
-          </button>
-      </motion.div>
-    </motion.div>
+        <button
+          onClick={handleDownloadPdf}
+          className="btn btn-soft btn-primary btn-lg gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
+        >
+          <FaDownload />
+          Download PDF
+        </button>
+      </div>
+    </div>
   );
 };
 
