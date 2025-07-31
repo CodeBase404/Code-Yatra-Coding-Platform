@@ -182,6 +182,7 @@ const GenerateResume = () => {
         </h3>
       </div>
 
+      <AnimatePresence>
         {fields.fields.map((field, index) => (
           <motion.div
             key={field.id}
@@ -227,6 +228,7 @@ const GenerateResume = () => {
             </button>
           </motion.div>
         ))}
+      </AnimatePresence>
 
       <button
         type="button"
@@ -269,6 +271,8 @@ const GenerateResume = () => {
     <motion.div
       key="input"
       initial="initial"
+      animate="in"
+      exit="out"
       className="min-h-screen flex items-center justify-center p-4"
     >
       <div className="card w-full max-w-2xl bg-base-100 dark:bg-purple-500/20 shadow-2xl">
@@ -332,6 +336,8 @@ const GenerateResume = () => {
     <motion.div
       key="form"
       initial="initial"
+      animate="in"
+      exit="out"
       variants={pageVariants}
       className="relative z-50 min-h-screen p-4"
     >
@@ -486,6 +492,8 @@ const GenerateResume = () => {
     <motion.div
       key="preview"
       initial="initial"
+      animate="in"
+      exit="out"
       variants={pageVariants}
       className="min-h-screen p-4 relative z-50"
     >
