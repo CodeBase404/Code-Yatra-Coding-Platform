@@ -11,7 +11,7 @@ import {
 import { BiBook } from "react-icons/bi";
 import { useForm, useFieldArray } from "react-hook-form";
 import { FaPlusCircle } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import Resume from "../components/ui/Resume";
 import axiosClient from "../utils/axiosClient";
 
