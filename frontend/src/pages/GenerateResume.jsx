@@ -11,7 +11,6 @@ import {
 import { BiBook } from "react-icons/bi";
 import { useForm, useFieldArray } from "react-hook-form";
 import { FaPlusCircle } from "react-icons/fa";
-import { motion, AnimatePresence } from "motion/react";
 import Resume from "../components/ui/Resume";
 import axiosClient from "../utils/axiosClient";
 
@@ -115,28 +114,6 @@ const GenerateResume = () => {
     }
   };
 
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      y: 20,
-    },
-    in: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
-    },
-    out: {
-      opacity: 0,
-      y: -20,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
   const renderInput = (name, label, type = "text", placeholder = "") => (
     <div className="form-control w-full mb-4">
       <label className="label">
@@ -170,11 +147,7 @@ const GenerateResume = () => {
   );
 
   const renderFieldArray = (fields, label, name, fieldKeys) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="form-control w-full mb-6"
-    >
+    <div className="form-control w-full mb-6">
       <div className="flex items-center gap-2 mb-4">
         <FaMagic className="text-primary" />
         <h3 className="text-xl font-bold text-base-content dark:text-white">
@@ -182,53 +155,48 @@ const GenerateResume = () => {
         </h3>
       </div>
 
-      <AnimatePresence>
-        {fields.fields.map((field, index) => (
-          <motion.div
-            key={field.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className={`card dark:bg-white/10 border border-black/10 dark:border-white/15 shadow-md p-4 mb-4`}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {fieldKeys.map((key) => {
-                if (key === "technologiesUsed") {
-                  return renderTextarea(
-                    `${name}.${index}.${key}`,
-                    "Technologies Used (comma-separated)",
-                    2,
-                    "React, Node.js, MongoDB..."
-                  );
-                }
-                return renderInput(
+      {fields.fields.map((field, index) => (
+        <div
+          key={field.id}
+          className={`card dark:bg-white/10 border border-black/10 dark:border-white/15 shadow-md p-4 mb-4`}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {fieldKeys.map((key) => {
+              if (key === "technologiesUsed") {
+                return renderTextarea(
                   `${name}.${index}.${key}`,
-                  key.charAt(0).toUpperCase() +
-                    key.slice(1).replace(/([A-Z])/g, " $1"),
-                  key.includes("email")
-                    ? "email"
-                    : key.includes("phone")
-                    ? "tel"
-                    : key.includes("link") ||
-                      key.includes("Link") ||
-                      key.includes("hub")
-                    ? "url"
-                    : "text",
-                  getPlaceholder(key)
+                  "Technologies Used (comma-separated)",
+                  2,
+                  "React, Node.js, MongoDB..."
                 );
-              })}
-            </div>
-            <button
-              type="button"
-              onClick={() => fields.remove(index)}
-              className="btn btn-error text-white btn-sm mt-3 gap-2"
-            >
-              <FaTrash />
-              Remove {label.slice(0, -1)}
-            </button>
-          </motion.div>
-        ))}
-      </AnimatePresence>
+              }
+              return renderInput(
+                `${name}.${index}.${key}`,
+                key.charAt(0).toUpperCase() +
+                  key.slice(1).replace(/([A-Z])/g, " $1"),
+                key.includes("email")
+                  ? "email"
+                  : key.includes("phone")
+                  ? "tel"
+                  : key.includes("link") ||
+                    key.includes("Link") ||
+                    key.includes("hub")
+                  ? "url"
+                  : "text",
+                getPlaceholder(key)
+              );
+            })}
+          </div>
+          <button
+            type="button"
+            onClick={() => fields.remove(index)}
+            className="btn btn-error text-white btn-sm mt-3 gap-2"
+          >
+            <FaTrash />
+            Remove {label.slice(0, -1)}
+          </button>
+        </div>
+      ))}
 
       <button
         type="button"
@@ -242,7 +210,7 @@ const GenerateResume = () => {
         <FaPlusCircle />
         Add {label.slice(0, -1)}
       </button>
-    </motion.div>
+    </div>
   );
 
   const getPlaceholder = (key) => {
@@ -268,13 +236,7 @@ const GenerateResume = () => {
   };
 
   const InputStep = () => (
-    <motion.div
-      key="input"
-      initial="initial"
-      animate="in"
-      exit="out"
-      className="min-h-screen flex items-center justify-center p-4"
-    >
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="card w-full max-w-2xl bg-base-100 dark:bg-purple-500/20 shadow-2xl">
         <div className="card-body text-center">
           <div className="mb-6">
@@ -329,18 +291,11 @@ const GenerateResume = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 
   const FormStep = () => (
-    <motion.div
-      key="form"
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      className="relative z-50 min-h-screen p-4"
-    >
+    <div className="relative z-50 min-h-screen p-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <div className="inline-block p-4 bg-secondary/10 dark:bg-white/10 rounded-full mb-4">
@@ -485,18 +440,11 @@ const GenerateResume = () => {
           </div>
         </form>
       </div>
-    </motion.div>
+    </div>
   );
 
   const PreviewStep = () => (
-    <motion.div
-      key="preview"
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      className="min-h-screen p-4 relative z-50"
-    >
+    <div className="min-h-screen p-4 relative z-50">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-2 dark:text-yellow-500">Your Professional Resume</h1>
         <p className="text-lg opacity-70 dark:text-gray-300">
@@ -522,7 +470,7 @@ const GenerateResume = () => {
           Edit Resume
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 
   return (
@@ -542,11 +490,9 @@ const GenerateResume = () => {
         }}
       />
 
-      <AnimatePresence mode="wait">
-        {currentStep === "input" && <InputStep />}
-        {currentStep === "form" && <FormStep />}
-        {currentStep === "preview" && <PreviewStep />}
-      </AnimatePresence>
+      {currentStep === "input" && <InputStep />}
+      {currentStep === "form" && <FormStep />}
+      {currentStep === "preview" && <PreviewStep />}
     </div>
   );
 };
