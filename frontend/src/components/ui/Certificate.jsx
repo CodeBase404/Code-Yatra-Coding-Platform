@@ -12,37 +12,25 @@ const Certificate = ({
   const certificateRef = useRef(null);
 
   const handleDownload = async () => {
-    try {
-      const element = certificateRef .current;
-      const canvas = await toPng(element, {
-        quality: 1.0,
-        pixelRatio: 2,
-        backgroundColor: "#ffffff",
-      });
-  
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 190;
-      const imgHeight = (element.offsetHeight * imgWidth) / element.offsetWidth;
-  
-      const pageHeight = 277;
-      let heightLeft = imgHeight;
-      let position = 10;
-  
-      pdf.addImage(canvas, "PNG", 10, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-  
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight + 10;
-        pdf.addPage();
-        pdf.addImage(canvas, "PNG", 10, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-  
-      pdf.save(`My_Certificate.pdf`);
-    } catch (err) {
-      console.error("Error generating PDF", err);
-    }
-  };
+  try {
+    const element = certificateRef.current;
+    const dataUrl = await toPng(element, {
+      quality: 1.0,
+      pixelRatio: 2,
+      backgroundColor: "#ffffff",
+    });
+
+    const pdf = new jsPDF("p", "mm", "a4");
+    const imgProps = pdf.getImageProperties(dataUrl);
+    const pdfWidth = 190;
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    pdf.addImage(dataUrl, "PNG", 10, 10, pdfWidth, pdfHeight);
+    pdf.save("My_Certificate.pdf");
+  } catch (err) {
+    console.error("Error generating PDF", err);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
@@ -89,8 +77,8 @@ const Certificate = ({
 
             <div className="mb-20 p-4 rounded-lg bg-blue-50">
               <h3 className="text-2xl md:text-3xl font-bold text-blue-600">
-                {solved10 && <div>10 Problems Solved on CodeYatra</div>}
-              </h3>
+  {solvedCount >= 10 && `${solvedCount} Problems Solved on CodeYatra`}
+</h3>
             </div>
           </div>
 
@@ -104,7 +92,7 @@ const Certificate = ({
 
             {/* Signature */}
             <div className="text-center">
-              <img className='h-15 w-30 rotate-12' src={signature} alt="" />
+              <img className='h-15 w-auto rotate-12' src={signature} alt="" />
               <div className="w-32 h-0.5 mb-2 mx-auto bg-gray-300"></div>
               <p className="font-semibold text-gray-800">Sonu Parvej</p>
               <p className="text-sm text-gray-500">Lead Instructor</p>
