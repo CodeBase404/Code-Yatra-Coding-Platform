@@ -19,7 +19,7 @@ function Dashboard() {
 
   const [showCertificate, setShowCertificate] = useState(false);
   const dispatch = useDispatch();
-  const solved50 = user?.problemSolved?.length === 50;
+  const solved10 = user?.problemSolved?.length === 10;
 
   useEffect(() => {
     dispatch(getAllSubmissions());
@@ -43,8 +43,8 @@ function Dashboard() {
         <div className="w-full  border border-black/20 dark:border-white/10 rounded-lg px-1">
   <div className="text-4xl font-bold pb-2">Certificates</div>
         <CertificateList
-          title="🏆 50 Problems Solved"
-          unlocked={solved50}
+          title="🏆 10 Problems Solved"
+          unlocked={solved10}
           onClick={() => setShowCertificate(true)}
           />
           </div>
@@ -58,7 +58,7 @@ function Dashboard() {
         {showCertificate && (
           <Certificate
             user={user}
-            solved50
+            solved10
           />
         )}
       </Modal>
