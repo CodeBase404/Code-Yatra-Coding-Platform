@@ -7,7 +7,7 @@ import signature from "/signature.png";
 
 const Certificate = ({
 
-  user, solved50
+  user, solved10
 }) => {
   const certificateRef = useRef(null);
 
@@ -89,7 +89,7 @@ const Certificate = ({
 
             <div className="mb-20 p-4 rounded-lg bg-blue-50">
               <h3 className="text-2xl md:text-3xl font-bold text-blue-600">
-                {solved50 && <div>50 Problems Solved on CodeYatra</div>}
+                {solved10 && <div>10 Problems Solved on CodeYatra</div>}
               </h3>
             </div>
           </div>
