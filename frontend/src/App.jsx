@@ -24,7 +24,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import IntroAnimation from "./components/ui/IntroAnimation";
 import { fetchAllProblems } from "./features/problem/problemThunks";
 import Visualizer from "./pages/Visualizer";
-import GenerateResume from "./pages/GenerateResume";
+
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -134,7 +134,7 @@ function App() {
           }
         />
         <Route path="/plans" element={<PlanPage />} />
-        <Route path="/generate-resume" element={<GenerateResume />} />
+
         <Route
           path="/visualize-algo"
           element={
