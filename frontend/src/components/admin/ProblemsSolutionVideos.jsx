@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Calendar, Loader2, TagIcon, Upload, Trash2 } from "lucide-react";
 import { getAllVideoSolution } from "../../features/problem/problemThunks";
@@ -71,15 +71,16 @@ function ProblemsSolutionVideos() {
   });
 
   if (loading && !solutionVideos) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="flex items-center space-x-2 text-gray-600">
-          <Loader2 className="h-6 w-6 animate-spin" />
-          <span>Loading submissions...</span>
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div className="flex justify-center items-center h-64">
+      <div className="flex items-center space-x-2 text-gray-600">
+        <Loader2 className="h-6 w-6 animate-spin" />
+        <span>Loading submissions...</span>
+      </div>
+    </div>
+  );
+}
+
 
   if (error) {
     return (
@@ -91,6 +92,10 @@ function ProblemsSolutionVideos() {
     );
   }
 
+  useEffect(() => {
+  dispatch(getAllVideoSolution());
+}, [dispatch]);
+  
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-neutral/5">
       {/* Filters */}
