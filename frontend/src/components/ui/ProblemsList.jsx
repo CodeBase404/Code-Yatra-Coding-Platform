@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllProblems,
   fetchSolvedProblems,
+  fetchFavorites
 } from "../../features/problem/problemThunks";
 import axiosClient from "../../utils/axiosClient";
 import { deleteProblemFromStore } from "../../features/problem/problemsSlice";
@@ -54,6 +55,7 @@ function ProblemsList({
   useEffect(() => {
     dispatch(fetchAllProblems());
     dispatch(fetchUserProfile());
+    dispatch(fetchFavorites())
     if (user) dispatch(fetchSolvedProblems());
   }, [user, dispatch]);
 
