@@ -140,14 +140,30 @@ function ProblemForm({ editMode = false, problemId }) {
     fetchProblem(); 
   }, [editMode, problemId, reset]);
 
+  const trimAllStrings = (obj) => {
+  if (Array.isArray(obj)) {
+    return obj.map(trimAllStrings);
+  } else if (typeof obj === "object" && obj !== null) {
+    const trimmed = {};
+    for (const key in obj) {
+      trimmed[key] = trimAllStrings(obj[key]);
+    }
+    return trimmed;
+  } else if (typeof obj === "string") {
+    return obj.trim();
+  }
+  return obj;
+};
+
   const onSubmit = async (data) => {
     setSubmitting(true)
     try {
       if (editMode && problemId) {
-        await axiosClient.put(`/problem/${problemId}`, data);
+        const trimmedData = trimAllStrings(data);
+        await axiosClient.put(`/problem/${problemId}`, trimmedData);
         alert("Problem updated successfully!");
       } else {
-        await axiosClient.post("/problem", data);
+        await axiosClient.post("/problem", trimmedData);
         alert("Problem created successfully!");
       }
       dispatch(setShowCreateModal(false));
