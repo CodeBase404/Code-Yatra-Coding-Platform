@@ -9,24 +9,24 @@ import { useDispatch } from "react-redux";
 import { setShowCreateModal } from "../../features/ui/uiSlice";
 
 const problemSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  description: z.string().min(1, "Description is required"),
+  title: z.string().min(1, "Title is required").transform(str => str.trim()),
+  description: z.string().min(1, "Description is required").transform(str => str.trim()),
   difficulty: z.enum(["easy", "medium", "hard"]),
   tags: z.enum(["array", "string", "linkedList", "graph", "dp"]),
   visibleTestCases: z
     .array(
       z.object({
-        input: z.string().min(1, "Input is required"),
-        output: z.string().min(1, "Output is required"),
-        explanation: z.string().min(1, "Explanation is required"),
+        input: z.string().min(1, "Input is required").transform(str => str.trim()),
+        output: z.string().min(1, "Output is required").transform(str => str.trim()),
+        explanation: z.string().min(1, "Explanation is required").transform(str => str.trim()),
       })
     )
     .min(1, "At least one visible test case required"),
   hiddenTestCases: z
     .array(
       z.object({
-        input: z.string().min(1, "Input is required"),
-        output: z.string().min(1, "Output is required"),
+        input: z.string().min(1, "Input is required").transform(str => str.trim()),
+        output: z.string().min(1, "Output is required").transform(str => str.trim()),
       })
     )
     .min(1, "At least one hidden test case required"),
@@ -34,7 +34,7 @@ const problemSchema = z.object({
     .array(
       z.object({
         language: z.enum(["cpp", "java", "javascript"]),
-        initialCode: z.string().min(1, "Initial code is required"),
+        initialCode: z.string().min(1, "Initial code is required").transform(str => str.trim()),
       })
     )
     .length(3, "All three languages required"),
@@ -42,7 +42,7 @@ const problemSchema = z.object({
     .array(
       z.object({
         language: z.enum(["cpp", "java", "javascript"]),
-        completeCode: z.string().min(1, "Complete code is required"),
+        completeCode: z.string().min(1, "Complete code is required").transform(str => str.trim()),
       })
     )
     .length(3, "All three languages required"),
@@ -140,30 +140,14 @@ function ProblemForm({ editMode = false, problemId }) {
     fetchProblem(); 
   }, [editMode, problemId, reset]);
 
-  const trimAllStrings = (obj) => {
-  if (Array.isArray(obj)) {
-    return obj.map(trimAllStrings);
-  } else if (typeof obj === "object" && obj !== null) {
-    const trimmed = {};
-    for (const key in obj) {
-      trimmed[key] = trimAllStrings(obj[key]);
-    }
-    return trimmed;
-  } else if (typeof obj === "string") {
-    return obj.trim();
-  }
-  return obj;
-};
-
   const onSubmit = async (data) => {
     setSubmitting(true)
     try {
       if (editMode && problemId) {
-        const trimmedData = trimAllStrings(data);
-        await axiosClient.put(`/problem/${problemId}`, trimmedData);
+        await axiosClient.put(`/problem/${problemId}`, data);
         alert("Problem updated successfully!");
       } else {
-        await axiosClient.post("/problem", trimmedData);
+        await axiosClient.post("/problem", data);
         alert("Problem created successfully!");
       }
       dispatch(setShowCreateModal(false));
